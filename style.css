@@ -10,22 +10,7 @@
   --error: #d64545;
   --grid: #eceef2;
   --shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f1218;
-    --surface: #171b23;
-    --border: #262c38;
-    --text: #e6e9ef;
-    --muted: #8a93a6;
-    --accent: #6b93ff;
-    --success: #3cc28d;
-    --warning: #f0a83a;
-    --error: #f06464;
-    --grid: #222834;
-    --shadow: none;
-  }
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; }
