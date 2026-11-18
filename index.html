@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API 사용량 모니터링</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">◆</span>
+      <h1>API 사용량 모니터링</h1>
+    </div>
+    <div class="controls">
+      <div class="segmented" id="rangeSelect" role="tablist" aria-label="조회 기간">
+        <button data-range="24h" class="active">24시간</button>
+        <button data-range="7d">7일</button>
+        <button data-range="30d">30일</button>
+      </div>
+      <label class="live-toggle">
+        <input type="checkbox" id="liveToggle" checked />
+        <span class="dot"></span> 실시간
+      </label>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- KPI 카드 -->
+    <section class="kpis">
+      <article class="card kpi">
+        <p class="kpi-label">총 요청 수</p>
+        <p class="kpi-value" id="kpiRequests">-</p>
+        <p class="kpi-delta" id="kpiRequestsDelta"></p>
+      </article>
+      <article class="card kpi">
+        <p class="kpi-label">데이터 전송량</p>
+        <p class="kpi-value" id="kpiData">-</p>
+        <p class="kpi-delta" id="kpiDataDelta"></p>
+      </article>
+      <article class="card kpi">
+        <p class="kpi-label">오류율</p>
+        <p class="kpi-value" id="kpiError">-</p>
+        <p class="kpi-delta" id="kpiErrorDelta"></p>
+      </article>
+      <article class="card kpi">
+        <p class="kpi-label">평균 응답시간</p>
+        <p class="kpi-value" id="kpiLatency">-</p>
+        <p class="kpi-delta" id="kpiLatencyDelta"></p>
+      </article>
+    </section>
+
+    <!-- 차트 영역 -->
+    <section class="grid-2">
+      <article class="card">
+        <div class="card-head">
+          <h2>요청 추이</h2>
+          <div class="legend">
+            <span><i class="sw sw-success"></i>성공</span>
+            <span><i class="sw sw-error"></i>오류</span>
+          </div>
+        </div>
+        <div class="chart" id="lineChart"></div>
+        <div class="tooltip" id="tooltip" hidden></div>
+      </article>
+
+      <article class="card">
+        <div class="card-head"><h2>월간 할당량</h2></div>
+        <div class="quota">
+          <div class="gauge" id="gauge">
+            <svg viewBox="0 0 120 120">
+              <circle class="gauge-track" cx="60" cy="60" r="50" />
+              <circle class="gauge-fill" id="gaugeFill" cx="60" cy="60" r="50" />
+            </svg>
+            <div class="gauge-text">
+              <strong id="quotaPct">0%</strong>
+              <span>사용됨</span>
+            </div>
+          </div>
+          <dl class="quota-info">
+            <div><dt>사용량</dt><dd id="quotaUsed">-</dd></div>
+            <div><dt>한도</dt><dd id="quotaLimit">-</dd></div>
+            <div><dt>초기화까지</dt><dd id="quotaReset">-</dd></div>
+          </dl>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid-2">
+      <article class="card">
+        <div class="card-head"><h2>엔드포인트별 요청</h2></div>
+        <div id="barChart" class="bars"></div>
+      </article>
+
+      <article class="card">
+        <div class="card-head"><h2>상태 코드 분포</h2></div>
+        <div id="statusList" class="status-list"></div>
+      </article>
+    </section>
+
+    <!-- 최근 요청 로그 -->
+    <section class="card">
+      <div class="card-head">
+        <h2>최근 요청</h2>
+        <input type="search" id="logFilter" placeholder="엔드포인트 검색…" />
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>시간</th>
+              <th>메서드</th>
+              <th>엔드포인트</th>
+              <th>상태</th>
+              <th class="num">응답시간</th>
+              <th class="num">크기</th>
+            </tr>
+          </thead>
+          <tbody id="logBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
