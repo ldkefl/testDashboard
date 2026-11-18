@@ -278,6 +278,21 @@ $('rangeSelect').addEventListener('click', e => {
   renderAll();
 });
 $('liveToggle').addEventListener('change', e => setLive(e.target.checked));
+
+// ===== 테마 전환 (밝은 버전 ↔ 기존 어두운 버전) =====
+function applyTheme(theme) {
+  const dark = theme === 'dark';
+  if (dark) document.documentElement.dataset.theme = 'dark';
+  else delete document.documentElement.dataset.theme;
+  // 버튼은 "전환될 테마"를 안내
+  $('themeIcon').textContent = dark ? '☀️' : '🌙';
+  $('themeLabel').textContent = dark ? '밝은 테마' : '어두운 테마';
+  try { localStorage.setItem('theme', theme); } catch (e) {}
+}
+$('themeToggle').addEventListener('click', () => {
+  applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+});
+applyTheme(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
 $('logFilter').addEventListener('input', renderLogs);
 
 let resizeTimer;

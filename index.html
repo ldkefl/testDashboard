@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>API 사용량 모니터링</title>
+  <script>
+    // 화면 깜빡임 방지: CSS 로드 전에 저장된 테마 적용
+    try {
+      if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark';
+    } catch (e) {}
+  </script>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -22,6 +28,10 @@
         <input type="checkbox" id="liveToggle" checked />
         <span class="dot"></span> 실시간
       </label>
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="테마 전환">
+        <span class="icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">어두운 테마</span>
+      </button>
     </div>
   </header>
 

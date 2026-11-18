@@ -13,6 +13,39 @@
   color-scheme: light;
 }
 
+/* 어두운 테마 (기존 버전) */
+:root[data-theme="dark"] {
+  --bg: #0f1218;
+  --surface: #171b23;
+  --border: #262c38;
+  --text: #e6e9ef;
+  --muted: #8a93a6;
+  --accent: #6b93ff;
+  --success: #3cc28d;
+  --warning: #f0a83a;
+  --error: #f06464;
+  --grid: #222834;
+  --shadow: none;
+  color-scheme: dark;
+}
+
+body { transition: background-color 0.2s, color 0.2s; }
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+}
+.theme-toggle:hover { border-color: var(--accent); }
+.theme-toggle .icon { font-size: 15px; line-height: 1; }
+
 * { box-sizing: border-box; }
 
 body {
